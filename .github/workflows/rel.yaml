@@ -57,7 +57,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.CR_PAT }}
 
       - name: Build and push
         id: docker_build
@@ -69,8 +69,7 @@ jobs:
           tags: ${{steps.tags.outputs.tags}}
           labels: |
             org.opencontainers.image.created=${{ steps.tags.outputs.date }}
-            org.opencontainers.image.url=${{ github.event.repository.html_url }}
-            org.opencontainers.image.source=${{ github.event.repository.clone_url }}
+            org.opencontainers.image.source=${{ github.event.repository.html_url }}
             org.opencontainers.image.version=${{ steps.tags.outputs.version }}
             org.opencontainers.image.revision=${{ github.sha }}
             org.opencontainers.image.licenses=${{ github.event.repository.license.spdx_id }}
