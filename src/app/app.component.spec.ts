@@ -9,7 +9,7 @@ describe('AppComponent', () => {
   let securityServiceSpy:  jasmine.SpyObj<SecurityService>; 
   let translateSpy: jasmine.SpyObj<TranslateService>;
   beforeEach(async () => {
-    securityServiceSpy = jasmine.createSpyObj('SecurityService', ['configureOAuthCodeFlow']);
+    securityServiceSpy = jasmine.createSpyObj('SecurityService', ['configureOAuthCodeFlow', 'connectedUser']);
     translateSpy = jasmine.createSpyObj('TranslateService', ['setDefaultLang', 'use']);
     await TestBed.configureTestingModule({
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
