@@ -8,8 +8,6 @@ on:
           default: ''
   release:
     types: [ published ]
-env:
-  EVENT: ${{ github.event_name }}        
 jobs:
 
   build-and-push-docker-image:
@@ -31,12 +29,12 @@ jobs:
           IMAGE=ghcr.io/bilelkhalsi/io-interfaces/admin-interface
           REF=${{ github.sha }}
           TAGS="${IMAGE}:${REF}"
-          if [$EVENT == 'release']
+          if [ $GITHUB_EVENT_NAME == 'release' ]
           then
             REF=${{ github.event.release.tag_name }}
             TAGS="${TAGS},${IMAGE}:${REF},${IMAGE}:latest"
             echo "Release event : ${REF}"
-          elif [ $EVENT == 'workflow_dispatch' ]
+          elif [ $GITHUB_EVENT_NAME == 'workflow_dispatch' ]
           then
             REF=${{ github.event.inputs.tag }}
             TAGS="${TAGS},${IMAGE}:${REF}"
