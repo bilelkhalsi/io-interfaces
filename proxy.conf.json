@@ -1,0 +1,40 @@
+[
+    {
+        "context": [
+            "/users"
+        ],
+        "target": "http://localhost:8085",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    {
+        "context": [
+            "/backlog/files"
+        ],
+        "target": "http://localhost:9000",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    {
+        "context": [
+            "/backlog/ref",
+            "/backlog/elements",
+            "/backlog/modules"
+        ],
+        "target": "http://localhost:9004",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    },
+    {
+        "context": [
+            "/auth"
+        ],
+        "target": "http://localhost:31380",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true
+    }
+]

@@ -1,0 +1,84 @@
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    height: 4px;
+    width: 4px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.26);
+  }
+}
+
+@mixin element-level {
+  .level {
+    max-width: 250px;
+  }
+}
+
+@mixin element-title {
+  .title {
+    max-width: 500px;
+  }
+}
+
+@mixin element-description {
+  .description {
+    max-width: 500px;
+  }
+}
+
+@mixin element-file {
+  .file {
+    max-width: 500px;
+    textarea {
+      @include scrollbar();
+    }
+  }
+}
+@mixin element-content {
+  .content {
+    textarea {
+        @include scrollbar();
+      }
+  }
+}
+
+@mixin element-transcription {
+  .transcription {
+    textarea {
+      @include scrollbar();
+    }
+  }
+}
+
+@mixin form-actions {
+  .form-actions {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 5px;
+  }
+}
+
+@mixin local-element-form {
+  form {
+    display: flex;
+    flex-direction: column;
+    @include element-level();
+    @include element-title();
+    @include element-description();
+    @include element-content();
+  }
+  @include form-actions();
+}
+
+@mixin remote-element-form {
+  form {
+    display: flex;
+    flex-direction: column;
+    @include element-level();
+    @include element-title();
+    @include element-description();
+    @include element-file();
+    @include element-transcription();
+  }
+  @include form-actions();
+}

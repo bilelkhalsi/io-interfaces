@@ -1,0 +1,47 @@
+<mat-table *ngIf="modules$ | async" [dataSource]="dataSource" class="mat-elevation-z0" cdkDropList>
+
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.module-list.title' | translate}}  </mat-header-cell>
+        <mat-cell *matCellDef="let module"> {{module.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.module-list.created' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let module"> {{module.creationDate | date:'dd/MM/yyyy' }} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef align="right">
+        </mat-header-cell>
+        <mat-cell *matCellDef="let module" align="right">
+            <button mat-button color="primary" ioStopPropagation (click)="editModule(module)">{{'backlog.module-list.action.edit' | translate}} </button>
+            <button mat-button color="warn" ioStopPropagation (click)="deleteModule(module)"> {{'backlog.module-list.action.delete' | translate}} </button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="header">
+        <mat-header-cell *matHeaderCellDef> <h2> {{'backlog.module-list.header' | translate}} </h2> </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="add">
+        <mat-header-cell *matHeaderCellDef>
+            <button mat-button color="primary" (click)="onNewModuleClick()">
+                <mat-icon>add</mat-icon>  {{'backlog.module-list.action.new' | translate}} 
+            </button>
+        </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="placeholder">
+        <mat-header-cell *matHeaderCellDef>
+            <span>{{'backlog.module-list.empty' | translate}}</span> <mat-icon>sentiment_very_dissatisfied</mat-icon><span>{{'backlog.module-list.disclaimer' | translate}}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef></mat-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="headerColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="backlogModuleColumns$ | async"></mat-header-row>
+    <mat-row cdkDrag *matRowDef="let module; columns: backlogModuleColumns$ | async" (click)="modulePreview(module)"></mat-row>
+
+</mat-table>

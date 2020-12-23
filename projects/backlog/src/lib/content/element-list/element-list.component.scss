@@ -1,0 +1,37 @@
+@import "../theming/backlog_element_list";
+
+@include element-list();
+@include dragable-element-list();
+
+:host {
+
+  display: block;
+
+  .mat-table {
+    width: 100%;
+
+    .mat-header-row:first-child {
+      border-bottom: none;
+    }
+
+    .mat-column-header {
+      flex: 3;
+
+      h2 {
+        margin: 0px;
+      }
+    }
+  }
+
+
+  /*
+  ::ng-deep {
+    mat-action-list mat-list-item {
+      div.mat-list-item-content {
+        align-items: flex-start !important;
+      }
+    }
+  }
+
+  */
+}

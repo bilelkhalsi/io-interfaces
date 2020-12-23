@@ -1,0 +1,22 @@
+@import "../theming/backlog_module_list";
+
+@include module-list();
+
+:host {
+    display: block;
+
+    .mat-table {
+        width: 100%;
+
+        .mat-header-row:first-child {
+            border-bottom: none;
+
+            .mat-column-header {
+                flex: 3;
+                h2 {
+                    margin: 0px;
+                }
+            }
+        }
+    }
+}

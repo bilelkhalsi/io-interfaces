@@ -1,0 +1,24 @@
+<div [ngSwitch]="elementType">
+    <io-document-element-form *ngSwitchCase="ElementTypeCode.DOCUMENT"
+    [element]="backlogFacade.element$ | async"
+    [levels]="levels"
+    (validate)="saveBacklogElement($event)"></io-document-element-form>
+    <io-image-element-form *ngSwitchCase="ElementTypeCode.IMAGE"
+    [element]="backlogFacade.element$ | async"
+    [levels]="levels"
+    (cancel)="cancel()"
+    (validate)="saveBacklogElement($event)"></io-image-element-form>
+    <io-audio-element-form *ngSwitchCase="ElementTypeCode.AUDIO"
+    [element]="backlogFacade.element$ | async"
+    [levels]="levels"
+    (cancel)="cancel()"
+    (validate)="saveBacklogElement($event)"></io-audio-element-form>
+    <io-video-element-form *ngSwitchCase="ElementTypeCode.VIDEO"
+    [element]="backlogFacade.element$ | async"
+    [levels]="levels"
+    (cancel)="cancel()"
+    (validate)="saveBacklogElement($event)"></io-video-element-form>
+    <div *ngSwitchDefault>
+        <p>Element type not supported yet!</p>
+    </div>
+</div>

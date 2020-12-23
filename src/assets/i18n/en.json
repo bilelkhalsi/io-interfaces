@@ -1,0 +1,148 @@
+{
+    "navbar": {
+        "mylives": "My Lives",
+        "mycourses": "My Courses",
+        "backlog": "My Backlog",
+        "editor": "Editor",
+        "support": "Support",
+        "signin": "Sign In",
+        "signout": "Sign Out",
+        "settings": "Settings"
+    },
+    "dialog": {
+        "info": {
+            "title": "Info!",
+            "ok": "Ok"
+        },
+        "warning": {
+            "title": "Warning!",
+            "ok": "Confirm",
+            "no": "Abort"
+        }
+    },
+    "notification": {
+        "dismiss": "Dismiss"
+    },
+    "backlog": {
+        "submit": "Save",
+        "cancel": "Cancel",
+        "header": {
+            "title": "Elements Backlog"
+        },
+        "levels": {
+            "P_1": "Primary school first year",
+            "P_2": "Primary school second year",
+            "P_3": "Primary school third year",
+            "P_4": "Primary school fourth year",
+            "P_5": "Primary school fifth year",
+            "P_6": "Primary school sixth year",
+            "S_1": "Secondary school first year",
+            "S_2": "Secondary school second year",
+            "S_3": "Secondary school third year",
+            "S_4": "Secondary school fourth year",
+            "S_5": "Secondary school fifth year",
+            "S_6": "Secondary school sixth year",
+            "BAC": "Bachelor",
+            "U_1": "University first year",
+            "U_2": "University second year",
+            "U_3": "University third year",
+            "U_4": "University fourth year",
+            "U_5": "University fifth year",
+            "E_1": "Engineering first year",
+            "E_2": "Engineering second year",
+            "E_3": "Engineering third year",
+            "E_4": "Engineering fourth year",
+            "E_5": "Engineering fifth year",
+            "PRO_1": "Professional first year",
+            "PRO_2": "Professional second year",
+            "PRO_3": "Professional third year",
+            "PRO_4": "Professional fourth year",
+            "PRO_5": "Professional fifth year"
+        },
+        "element-type": {
+            "AUDIO": "Audio Element",
+            "DOCUMENT": "Document Element",
+            "IMAGE": "Image Element",
+            "VIDEO": "Video Element"
+        },
+        "sidenav": {
+            "new-element": "New Element"
+        },
+        "element-preview": {
+            "overview": "Overview",
+            "transcription": "Transcription",
+            "q&a": "Q&A"
+        },
+        "element-form": {
+            "notification": {
+                "created": "Element created successfully!",
+                "updated": "Element updated successfully!",
+                "failed": "Technical Error, Opertaion Failed !"
+            }
+        },
+        "document-form": {
+            "level-placeholder": "Target level",
+            "title-placeholder": "Document title",
+            "description-placeholder": "Document brief description",
+            "content-placeholder": "Document content (markdonw)",
+            "content-preview": "click here to see preview"
+        },
+        "local-element": {
+            "level-placeholder": "Target level",
+            "title-placeholder": "Element title",
+            "description-placeholder": "Element brief description",
+            "content-placeholder": "Element content ({{type}})",
+            "content-preview": "click here to see preview"
+        },
+        "remote-element": {
+            "level-placeholder": "Target level",
+            "title-placeholder": "Element title",
+            "description-placeholder": "Element brief description",
+            "transcription-placeholder": "Element transcription ({{type}})",
+            "content-placeholder": "Element content ({{type}})"
+        },
+        "element-list": {
+            "header": "Elements",
+            "type": "Element Type",
+            "element": "Element",
+            "created": "Created",
+            "level": "Level",
+            "load-more": "More Elements",
+            "disclaimer": "Click 'New Element' to create new element",
+            "empty": "No Elements yet",
+            "loading": "Loading",
+            "action": {
+                "new": "New Element",
+                "edit": "Edit",
+                "delete": "Delete",
+                "delete-warning": "You are going to delete a backlog element"
+            }
+        },
+        "module-list": {
+            "header": "Modules",
+            "title": "Title",
+            "created": "Created",
+            "disclaimer": "Click 'New Module' to create new module",
+            "empty": "No Modules yet",
+            "action": {
+                "new": "New Module",
+                "edit": "Edit",
+                "delete": "Delete",
+                "delete-warning": "You are going to delete a backlog module"
+            }
+        },
+        "module-form": {
+            "name-placeholder": "Module Name",
+            "disclaimer": "Drop backlog elements in the box to add them to this module!",
+            "notification": {
+                "created": "Module created successfully!",
+                "updated": "Module updated successfully!",
+                "failed": "Technical Error, Opertaion Failed !"
+            },
+            "action": {
+                "cancel": "Cancel",
+                "submit": "Submit"
+            }
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@import "../../../../../../theming/backlog_element_form";
+
+:host  {
+  display: block;
+  @include remote-element-form();
+}

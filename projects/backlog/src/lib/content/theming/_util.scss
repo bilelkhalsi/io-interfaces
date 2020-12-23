@@ -1,0 +1,30 @@
+// WIDTH & HEIGHT
+@each $var in 100,
+75,
+50,
+25 {
+    .w-#{$var} {
+        width: $var + 0%;
+    }
+
+    .h-#{$var} {
+        height: $var + 0%;
+    }
+}
+
+// OVERFLOW
+.overflow-auto {
+    overflow: auto;
+}
+
+// SCROLL-BAR
+.thin-scrollbar {
+    &::-webkit-scrollbar {
+        height: 5px;
+        width: 5px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.26);
+    }
+}

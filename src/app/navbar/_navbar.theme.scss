@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+
+@mixin io-navbar-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $unselected-background: mat-color($background, unselected-chip);
+  $unselected-foreground: mat-color($foreground, text);
+
+  md-navbar, md-admin-navbar {
+    background: mat-color($primary);
+    color: mat-color($primary, default-contrast);
+  }
+}
+
+
+@mixin io-navbar-typography($config) {}

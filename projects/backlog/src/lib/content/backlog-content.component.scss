@@ -1,0 +1,19 @@
+:host {
+  display: block;
+  width: 100%;
+  div > div {
+    padding: 16px 8px;
+  }
+  
+  io-module-form,
+  io-module-list {
+    margin-bottom: 8px;
+  }
+  io-element-list {
+    margin-bottom: 16px;
+  }
+  mat-divider {
+    width: 1px;
+  }
+
+}

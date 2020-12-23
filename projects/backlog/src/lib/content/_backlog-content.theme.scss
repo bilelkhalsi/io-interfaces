@@ -1,0 +1,28 @@
+@import "~@angular/material/theming";
+@import "./element-list/element-list.theme";
+@import "./module-form/module-form.theme";
+@import "./module-list/module-list.theme";
+
+@mixin io-backlog-content-theme($theme) {
+
+    @include io-element-list-theme($theme);
+    @include io-module-form-theme($theme);
+    @include io-module-list-theme($theme);
+
+    $is-dark-theme: map-get($theme, is-dark);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $unselected-background: mat-color($background, unselected-chip);
+    $unselected-foreground: mat-color($foreground, text);
+
+    .load-next-page {
+        background-color: mat-color($background, hover);
+    }
+}
+
+
+@mixin io-backlog-content-typography($config) {}

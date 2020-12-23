@@ -1,0 +1,27 @@
+<div class="d-flex flex-column" *ngIf="backlogFacade.element$ | async as element">
+    <div class="element-header">
+        <h1 class="element-title">{{element.title}}</h1>
+        <span class="text-muted"
+            *ngIf="backlogFacade.getLevelById(element.levelId) | async as level">{{level.description}}</span>
+        <span class="mat-h1">.</span>
+        <span class="text-muted">{{element.creationDate | date: 'dd/MM/yyyy'}}</span>
+    </div>
+    <div [ngSwitch]="getElementTypeCode(element.typeId) | async" class="element-content">
+        <div *ngSwitchCase="ELEMENT_TYPE.DOCUMENT">Document</div>
+        <div *ngSwitchCase="ELEMENT_TYPE.AUDIO">Audio</div>
+        <div *ngSwitchCase="ELEMENT_TYPE.VIDEO">
+            http://localhost:4572/iozone-videos/{{element['url']}}
+        </div>
+        <div *ngSwitchCase="ELEMENT_TYPE.IMAGE">Image</div>
+        <div *ngSwitchDefault>
+            this type is not yet available!
+        </div>
+    </div>
+    <div class="element-detail">
+        <mat-tab-group animationDuration="0ms">
+            <mat-tab [label]="'backlog.element-preview.overview' | translate">Overview</mat-tab>
+            <mat-tab [label]="'backlog.element-preview.q&a' | translate">Q&A</mat-tab>
+            <mat-tab [label]="'backlog.element-preview.transcription' | translate">Transcription</mat-tab>
+        </mat-tab-group>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+<div class="d-flex w-100 h-100">
+    <div class="flex-fill overflow-auto thin-scrollbar">
+
+        <io-element-list></io-element-list>
+
+        <io-module-list></io-module-list>
+
+    </div>
+
+    <mat-divider [vertical]="true"></mat-divider>
+
+    <div class="flex-fill">
+
+        <router-outlet></router-outlet>
+
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<ng-container *ngIf="elements$ | async as elements; else empty">
+    <io-element-list [elements]="elements" (clickElement)="elementPeview($event)"></io-element-list>
+
+    
+div class="load-next-page">
+        <io-load-button label="{{'backlog.element-list.load-more' | translate}}"></io-load-button>
+    </div
+</ng-container>
+<ng-template #empty>
+<div class="d-flex h-75 justify-content-center align-items-center">
+    <io-load-empty [message]="'backlog.element-list.empty-list' | translate"></io-load-empty>
+</div>
+</ng-template>
+-->

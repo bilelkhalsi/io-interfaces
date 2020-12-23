@@ -1,0 +1,11 @@
+<mat-dialog-content>
+
+    <io-image-element-form #form
+        [levels]="backlogFacade.levels$ | async"
+        [element]="data.element"></io-image-element-form>
+
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="secondary" (click)="onCancel()">{{ 'backlog.cancel' | translate}}</button>
+    <button mat-raised-button color="primary" [disabled]="!form.valid()" (click)="onSubmit()"> {{ 'backlog.submit' | translate}} </button>
+</mat-dialog-actions>

@@ -1,0 +1,35 @@
+<form [formGroup]="formGroup">
+
+    <mat-form-field floatLabel="never" class="level">
+        <mat-select placeholder="{{ 'backlog.document-form.level-placeholder' | translate}}" formControlName="levelId">
+            <mat-option *ngFor="let l of levels" [value]="l.id">
+                {{ 'backlog.levels.' + l.code | translate}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="title">
+        <input matInput placeholder="{{ 'backlog.document-form.title-placeholder' | translate}}" formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="description">
+        <input matInput placeholder="{{ 'backlog.document-form.description-placeholder' | translate}}" formControlName="description">
+    </mat-form-field>
+
+    <mat-form-field floatLabel="never" class="content">
+        <textarea matInput rows="10" placeholder="{{ 'backlog.document-form.content-placeholder' | translate}}" formControlName="content"></textarea>
+        <!--mat-hint align="end">
+            <a [routerLink]="['editor']" [queryParams]="{content: formGroup.get('content').value}" target="_blank">{{'backlog.document-form.content-preview' | translate}}</a>
+        </mat-hint-->
+    </mat-form-field>
+
+</form>
+
+
+<div class="d-flex justify-content-end">
+    <button mat-button color="secondary" (click)="onCancel()">
+        {{ 'backlog.cancel' | translate}}
+    </button>
+    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="onValidate()">
+        {{ 'backlog.submit' | translate}}
+    </button>
+</div>

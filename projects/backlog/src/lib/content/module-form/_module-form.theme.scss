@@ -1,0 +1,26 @@
+@import "~@angular/material/theming";
+
+@mixin io-module-form-theme($theme) {
+    $is-dark-theme: map-get($theme, is-dark);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $unselected-background: mat-color($background, unselected-chip);
+    $unselected-foreground: mat-color($foreground, text);
+
+    .mat-table.empty {
+        border: 1px dashed mat-color($foreground, divider);
+    }
+
+    .module-form-disclaimer {
+        font-size: 13px;
+        color: mat-color($foreground, secondary-text);
+    }
+
+}
+
+
+@mixin io-module-form-typography($config) {}

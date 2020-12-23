@@ -1,0 +1,35 @@
+@import "~@angular/material/theming";
+
+@mixin io-notification-theme($theme) {
+  $is-dark-theme: map-get($theme, is-dark);
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  $unselected-background: mat-color($background, unselected-chip);
+  $unselected-foreground: mat-color($foreground, text);
+
+  .mat-snack-bar-container {
+    // Use the primary text on the dark theme, even though the lighter one uses
+    // a secondary, because the contrast on the light primary text is poor.
+    // color: if($is-dark-theme, $dark-primary-text, $light-secondary-text);
+    // background: if($is-dark-theme, map-get($mat-grey, 50), #323232);
+
+    &.info-notification {
+      color: mat-color($primary, default-contrast);
+      background-color: if($is-dark-theme, mat-color($accent), mat-color($primary));
+    }
+    &.error-notification {
+      color: mat-color($warn, default-contrast);
+      background-color: mat-color($warn);
+    }
+  }
+
+
+
+}
+
+
+@mixin io-notification-typography($config) {}

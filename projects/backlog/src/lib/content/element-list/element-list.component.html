@@ -1,0 +1,115 @@
+<mat-table id="io-backlog-elements"
+    *ngIf="elements$ | async" 
+    cdkDropList 
+    [cdkDropListConnectedTo]="'io-module-form'"
+    [dataSource]="dataSource"
+    (cdkDropListDropped)="elementDropped($event)">
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-icon class="type">{{element.typeId | typeIcon}}</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="level">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.level' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span *ngIf="elementLevel(element.levelId) | async as level"
+                [matTooltip]="level.description">{{level.code}}
+            </span>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.element' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.created' | translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.creationDate | date: 'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef align="right"></mat-header-cell>
+        <mat-cell *matCellDef="let element" align="right">
+            <button mat-button color="primary"
+                ioStopPropagation
+                (click)="editElement(element)">{{'backlog.element-list.action.edit' | translate}}</button>
+            <button mat-button color="warn"
+                ioStopPropagation
+                (click)="deleteElement(element)">{{'backlog.element-list.action.delete' | translate}}</button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="header">
+        <mat-header-cell *matHeaderCellDef>
+            <h2>{{'backlog.element-list.header' | translate}}</h2>
+        </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="add">
+        <mat-header-cell *matHeaderCellDef>
+            <button mat-button [matMenuTriggerFor]="elements" color="primary">
+                <mat-icon>arrow_drop_down</mat-icon>
+                {{'backlog.element-list.action.new' | translate}}
+            </button>
+        </mat-header-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="placeholder">
+        <mat-header-cell *matHeaderCellDef>
+            <span>{{'backlog.element-list.empty' | translate}}</span> <mat-icon>sentiment_very_dissatisfied</mat-icon><span>{{'backlog.element-list.disclaimer' | translate}}</span>
+        </mat-header-cell>
+        <mat-cell *matCellDef></mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="headerColumns"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="elementColumns$ | async"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: elementColumns$ | async ;" cdkDrag [cdkDragData]="element" (click)="viewElement(element)">
+    </mat-row>
+</mat-table>
+
+<mat-menu #elements="matMenu">
+    <a *ngFor="let type of backlogFacade.types$ | async" mat-menu-item
+        [routerLink]="['element','new', type.code.toLowerCase()]">
+        {{'backlog.element-type.' + type.code | translate}}
+    </a>
+</mat-menu>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--mat-action-list>
+    <mat-list-item *ngFor="let element of elements">
+        <mat-icon matListIcon>{{element.typeId | typeIcon}}</mat-icon>
+        <h3 matLine> 
+            {{element.title}} - <span *ngIf="elementLevel(element.levelId) | async as level" class="level" [matTooltip]="level.description"> {{level.code}} </span>
+        </h3>
+        <div matLine class="d-flex">
+            <span> {{element.creationDate | date}}</span>
+            <span class="flex-fill"></span>
+        </div>
+        <p matLine>
+            {{element.description}}
+        </p>
+    </mat-list-item>
+</mat-action-list-->

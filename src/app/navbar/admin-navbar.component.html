@@ -1,0 +1,23 @@
+<nav>
+    <a mat-button color="primary" [routerLink]="['/']">Ta3lim Admin</a>
+    <a mat-button color="primary" [routerLink]="['/mycourses']">{{'navbar.mycourses' | translate}}</a>
+    <a mat-button color="primary" [routerLink]="['/mybacklog']">{{'navbar.backlog' | translate}}</a>
+    <a mat-button color="primary" [routerLink]="['/mylives']">{{'navbar.mylives' | translate}}</a>
+    <a mat-button color="primary" [routerLink]="['/editor']">{{'navbar.editor' | translate}}</a>
+    <a mat-button color="primary" [routerLink]="['/support']">{{'navbar.support' | translate}}</a>
+    <span class="flex-fill"></span>
+    <button mat-button *ngIf="!!user; else loginbtn" [matMenuTriggerFor]="connectedOptions" color="primary" class="connected-user-menu-btn">
+        <mat-icon>account_circle</mat-icon>
+        <div class="mat-small">{{user.firstname}} {{user.lastname}}</div>
+    </button>
+</nav>
+<mat-menu #connectedOptions="matMenu" color="primary">
+    <button mat-menu-item>{{'navbar.settings' | translate}}</button>
+    <button mat-menu-item>{{'navbar.signout' | translate}}</button>
+</mat-menu>
+<ng-template #loginbtn>
+    <button mat-button (click)="login.emit()" class="login-btn" color="primary">
+        <mat-icon>login</mat-icon>
+        <div class="mat-small">{{'navbar.signin' | translate}}</div>
+    </button>
+</ng-template>

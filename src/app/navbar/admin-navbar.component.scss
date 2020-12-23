@@ -1,0 +1,15 @@
+:host {
+    display: block;
+  
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      padding: 8px 16px;
+    }
+
+    button.connected-user-menu-btn, bottom.login-btn {
+        line-height: 1;
+    }
+  }
+  
