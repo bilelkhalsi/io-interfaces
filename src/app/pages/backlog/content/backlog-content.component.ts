@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { BacklogElement } from '@io/model/backlog/backlog-element';
 
 @Component({
     selector: 'io-backlog-content',
@@ -11,4 +12,10 @@ export class BacklogContentComponent implements OnInit {
     constructor() { }
 
     ngOnInit() { }
+
+
+    saveElement(element: BacklogElement) {
+        // TODO : call core service to save element
+        console.log('todo: save element !', element);
+    }
 }

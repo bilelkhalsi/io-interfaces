@@ -1,0 +1,61 @@
+<ng-container *ngIf="module$ | async as currentModule">
+<div class="d-flex module-title">
+    <mat-form-field class="flex-fill">
+        <input [value]="currentModule.title" (change)="titleChanged($event)" matInput placeholder="{{'backlog.module-form.name-placeholder'|translate}}">
+    </mat-form-field>
+</div>
+
+<div class="d-flex align-items-start module-form-disclaimer">
+    <span>{{'backlog.module-form.disclaimer' | translate}}</span>
+</div>
+
+<mat-table id="io-module-form"
+    *ngIf="module$ | async as currentModule"
+    cdkDropList
+    [dataSource]="dataSource"
+    [cdkDropListConnectedTo]="'io-backlog-elements'"
+    (cdkDropListDropped)="elementDropped($event)"
+    [ngClass]="{'empty': !currentModule.elements.length}">
+
+
+    <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <mat-icon class="type">{{element.typeId | typeIcon}}</mat-icon>
+        </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="level">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.level'|translate}}  </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+            <span *ngIf="elementLevel(element.levelId) | async as level" [matTooltip]="level.description">{{level.code}}</span>    
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.element'|translate}}  </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.title}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="created">
+        <mat-header-cell *matHeaderCellDef> {{'backlog.element-list.created'|translate}} </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.creationDate | date: 'dd/MM/yyyy'}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef align="right"></mat-header-cell>
+        <mat-cell *matCellDef="let element" align="right">
+            <button mat-button color="warn" (click)="deleteElement(element)">{{'backlog.element-list.action.delete' | translate}}</button>
+        </mat-cell>
+    </ng-container>
+    
+    <mat-header-row *matHeaderRowDef="moduleElementColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: moduleElementColumns;" cdkDrag [cdkDragData]="element"></mat-row>
+</mat-table>
+
+<div class="d-flex justify-content-end">
+    <button mat-button color="warn" (click)="cancel()">{{'backlog.module-form.action.cancel'|translate}}</button>
+    <button mat-button color="primary" [disabled]="!(currentModule.title && currentModule.elements.length)" (click)="saveModule(currentModule)">{{'backlog.module-form.action.submit'|translate}}</button>
+</div>
+</ng-container>

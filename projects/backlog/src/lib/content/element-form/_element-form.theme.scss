@@ -1,0 +1,30 @@
+@import "~@angular/material/theming";
+
+@mixin io-element-form-theme($theme) {
+    $is-dark-theme: map-get($theme, is-dark);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $warn: map-get($theme, warn);
+    $background: map-get($theme, background);
+    $foreground: map-get($theme, foreground);
+
+    $unselected-background: mat-color($background, unselected-chip);
+    $unselected-foreground: mat-color($foreground, text);
+
+    .mat-column-placeholder {
+        mat-icon {
+            color:  mat-color($foreground, divider);
+        }
+    }
+    
+    io-element-form mat-form-field {
+        div.mat-form-field-suffix {
+            align-self: flex-start;
+        }
+    }
+
+
+}
+
+
+@mixin io-element-form-typography($config) {}

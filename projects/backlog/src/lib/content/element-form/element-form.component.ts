@@ -1,12 +1,22 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, Input, Output } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { mapElementTypeIdToTypeCode } from '@io/core';
-import { BacklogFacade } from '@io/core/service';
-import { BacklogElementTypeCode, Levels, LocalBacklogElement, BacklogElement } from '@io/model';
-import { Observable, Subject } from 'rxjs';
-import { map, takeUntil } from 'rxjs/operators';
-// import { NotificationService } from '../../../../common/notification/notification.service';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { BacklogElement, ElementType, Levels, LocalBacklogElement } from '@io/model';
+import { Subject } from 'rxjs';
+import { filter, takeUntil } from 'rxjs/operators';
+import { AudioElementFormDialogComponent } from './audio-element/audio-element-from.dialog';
+import { ElementFormDialogData } from './backlog-element-form.dialog';
+import { DocumentElementFormDialogComponent } from './document-element/document-element-from.dialog';
+import { ImageElementFormDialogComponent } from './image-element/image-element-from.dialog';
+import { VideoElementFormDialogComponent } from './video-element/video-element-from.dialog';
 
+
+const ELMENT_DIALOG_COMPONENT = new Map<ElementType, any>([
+    [ElementType.AUDIO, AudioElementFormDialogComponent],
+    [ElementType.DOCUMENT, DocumentElementFormDialogComponent],
+    [ElementType.IMAGE, ImageElementFormDialogComponent],
+    [ElementType.VIDEO, VideoElementFormDialogComponent]
+])
 @Component({
     selector: 'io-element-form',
     templateUrl: 'element-form.component.html',
@@ -14,31 +24,25 @@ import { map, takeUntil } from 'rxjs/operators';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class ElementFormComponent implements OnInit, OnDestroy {
+export class ElementFormComponent implements OnDestroy {
+
+    private readonly onDestroy$ = new Subject();
 
     @Input()
-    levels : Levels = []
+    levels: Levels = []
 
     @Input()
-    elementType : BacklogElementTypeCode;
+    types: ElementType[] = [ElementType.VIDEO, ElementType.AUDIO];
 
     @Input()
     element: BacklogElement;
 
-    public readonly ElementTypeCode = BacklogElementTypeCode;
-    private readonly onDestroy$ = new Subject();
-    public elementTypeCode$: Observable<BacklogElementTypeCode>;
+    @Output()
+    save = new EventEmitter<BacklogElement>();
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        // private notificationService: NotificationService,
-        public backlogFacade: BacklogFacade) {
+    public elementTitle = new FormControl();
 
-    }
-
-    ngOnInit(): void {
-       
+    constructor(private dialog: MatDialog) {
     }
 
     ngOnDestroy(): void {
@@ -46,20 +50,19 @@ export class ElementFormComponent implements OnInit, OnDestroy {
         this.onDestroy$.complete();
     }
 
-    cancel(): void {
-        this.router.navigate(['mybacklog']);
-    }
-
-    saveBacklogElement(element: LocalBacklogElement): void {
-        const type = mapElementTypeIdToTypeCode(element.typeId);
-        this.backlogFacade.saveBacklogElement(element).pipe(
-            takeUntil(this.onDestroy$)
-        ).subscribe(savedElement => {
-            // this.notificationService.info('backlog.element-form.notification.created');
-            this.router.navigate(['mybacklog', type.toLowerCase(), savedElement.id]);
-        }, (error) => {
-            console.log('Error occured', error);
-            // this.notificationService.error('backlog.element-form.notification.fealed');
-        })
+    openNewElementDialog(type: ElementType) {
+        const component = ELMENT_DIALOG_COMPONENT.get(type);
+        const data: ElementFormDialogData<BacklogElement> = {
+            type,
+            element: this.element,
+            levels: this.levels
+        };
+        this.dialog.open(component, { data, minWidth: '50%' }).afterClosed()
+            .pipe(
+                takeUntil(this.onDestroy$),
+                filter(res => !!res)
+            ).subscribe(res => {
+                this.save.emit(res);
+            });
     }
 }

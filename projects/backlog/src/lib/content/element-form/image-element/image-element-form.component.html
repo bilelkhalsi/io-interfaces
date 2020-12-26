@@ -43,5 +43,5 @@
 </form>
 <div class="d-flex justify-content-end">
     <button mat-button color="secondary" (click)="onCancel()">{{ 'backlog.cancel' | translate}}</button>
-    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="onSubmit()"> {{ 'backlog.submit' | translate}} </button>
+    <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="onValidate()"> {{ 'backlog.submit' | translate}} </button>
 </div>

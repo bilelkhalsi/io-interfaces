@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BacklogElementMediaType, BacklogElementTypeId, Levels, LocalBacklogElement } from '@io/model';
+import { BacklogElementTypeId, ElementType, Levels, LocalBacklogElement } from '@io/model';
+import { BacklogElementMediaType } from '@io/model/backlog/backlog-element-type';
 import { BacklogElementForm } from '../backlog-element-form';
 
 
@@ -37,23 +38,20 @@ export class DocumentElementFormComponent implements OnChanges, OnDestroy, Backl
     }
 
     get mediaType(): string {
-        return (this.element && this.element.typeId) ? BacklogElementMediaType.get(this.element.typeId) : '*';
+        return BacklogElementMediaType.get(ElementType.DOCUMENT) || '*';
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.element) {
-            if (changes.element.currentValue.id) {
-                this.formGroup.addControl('id', this.fb.control(this.element.id, [Validators.required]));
+        if (changes.element && changes.element.currentValue) {
+            const currentValue = changes.element.currentValue;
+            if (currentValue.id) {
+                this.formGroup.addControl('id', this.fb.control(currentValue.id, [Validators.required]));
             }
-            this.formGroup.patchValue(changes.element.currentValue);
+            this.formGroup.patchValue(currentValue);
         }
     }
 
     ngOnDestroy(): void {
-
-    }
-
-    onSubmit(): void {
 
     }
 
@@ -64,14 +62,6 @@ export class DocumentElementFormComponent implements OnChanges, OnDestroy, Backl
 
     onValidate(): void {
         this.validate.emit(this.formGroup.value);
-    }
-
-    snapshot(): LocalBacklogElement {
-        return this.formGroup.value;
-    }
-
-    valid(): boolean {
-        return this.formGroup.valid;
     }
 
 }

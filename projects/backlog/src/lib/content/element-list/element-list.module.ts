@@ -33,7 +33,7 @@ import { BacklogElementListComponent } from './element-list.component';
         ElementTypeModule,
         ElementLevelModule
     ],
-    exports: [BacklogElementListComponent],
-    declarations: [BacklogElementListComponent]
+    declarations: [BacklogElementListComponent],
+    exports: [BacklogElementListComponent]
 })
 export class BacklogElementListModule { }

@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { CorePipeModule } from '@io/core/pipes';
-import { ModuleFormComponent } from './module-form.component';
+import { BacklogModuleFormComponent } from './module-form.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 
@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
         DragDropModule,
         CorePipeModule
     ],
-    declarations: [ModuleFormComponent],
-    exports: [ModuleFormComponent]
+    declarations: [BacklogModuleFormComponent],
+    exports: [BacklogModuleFormComponent]
 })
 export class BacklogModuleFormModule { }

@@ -1,11 +1,9 @@
 <mat-dialog-content>
 
-    <io-document-element-form #form
-        [levels]="backlogFacade.levels$ | async"
-        [element]="data.element"></io-document-element-form>
+    <io-document-element-form
+        [levels]="data.levels"
+        [element]="data.element"
+        (validate)="onSubmit($event)"
+        (cancel)="onCancel()"></io-document-element-form>
 
 </mat-dialog-content>
-<mat-dialog-actions>
-    <button mat-button color="secondary" (click)="onCancel()">{{ 'backlog.cancel' | translate}}</button>
-    <button mat-raised-button color="primary" [disabled]="!form.valid()" (click)="onSubmit()"> {{ 'backlog.submit' | translate}} </button>
-</mat-dialog-actions>

@@ -1,10 +1,12 @@
 @import "~@angular/material/theming";
 @import "./element-list/element-list.theme";
+@import "./element-form/element-form.theme";
 @import "./module-form/module-form.theme";
 @import "./module-list/module-list.theme";
 
 @mixin io-backlog-content-theme($theme) {
 
+    @include io-element-form-theme($theme);
     @include io-element-list-theme($theme);
     @include io-module-form-theme($theme);
     @include io-module-list-theme($theme);

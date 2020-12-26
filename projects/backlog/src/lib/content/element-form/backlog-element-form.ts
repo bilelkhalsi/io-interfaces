@@ -10,9 +10,4 @@ export interface BacklogElementForm<T extends BacklogElement> {
     validate: EventEmitter<T>;
 
     cancel: EventEmitter<any>;
-
-    snapshot(): T;
-
-    valid(): boolean;
-
 }

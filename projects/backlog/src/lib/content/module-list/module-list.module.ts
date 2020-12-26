@@ -8,19 +8,17 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTableModule } from '@angular/material/table';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { RouterModule } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { CoreDirectiveModule } from '@io/core/directives';
 import { CorePipeModule } from '@io/core/pipes';
+import { TranslateModule } from '@ngx-translate/core';
 import { ElementLevelModule } from '../element-level/element-level.module';
 import { ElementTypeModule } from '../element-type/element-type.module';
 import { BacklogModuleListComponent } from './module-list.component';
-import { CoreDirectiveModule } from '@io/core/directives';
 
 
 @NgModule({
     imports: [
         CommonModule,
-        RouterModule,
         TranslateModule,
         MatListModule,
         MatIconModule,
@@ -35,7 +33,7 @@ import { CoreDirectiveModule } from '@io/core/directives';
         ElementTypeModule,
         ElementLevelModule
     ],
-    exports: [BacklogModuleListComponent],
-    declarations: [BacklogModuleListComponent]
+    declarations: [BacklogModuleListComponent],
+    exports: [BacklogModuleListComponent]
 })
 export class BacklogModuleListModule { }

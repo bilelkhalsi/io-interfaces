@@ -1,11 +1,7 @@
-import { ChangeDetectionStrategy, Component, Inject, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BacklogFacade } from '@io/core/service';
 import { RemoteBacklogElement } from '@io/model';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { BacklogElementForm } from '../backlog-element-form';
-import { BacklogElementFormDialog } from '../backlog-element-form.dialog';
+import { BacklogElementFormDialog, ElementFormDialogData } from '../backlog-element-form.dialog';
 
 
 @Component({
@@ -17,27 +13,16 @@ import { BacklogElementFormDialog } from '../backlog-element-form.dialog';
 })
 export class ImageElementFormDialogComponent implements BacklogElementFormDialog<RemoteBacklogElement> {
 
-    @ViewChild('form')
-    form: BacklogElementForm<RemoteBacklogElement>;
-
-    private onDestroy$ = new Subject();
-
-
     constructor(
-        public backlogFacade: BacklogFacade,
         public dialogRef: MatDialogRef<ImageElementFormDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { element: RemoteBacklogElement }) {
+        @Inject(MAT_DIALOG_DATA) public data: ElementFormDialogData<RemoteBacklogElement>) {
     }
 
-    onSubmit(): void {
-        this.backlogFacade.saveBacklogElement(this.form.snapshot()).pipe(
-            takeUntil(this.onDestroy$)
-        ).subscribe();
+    onSubmit(element: RemoteBacklogElement): void {
+        this.dialogRef.close(element);
     }
 
     onCancel(): void {
-        this.onDestroy$.next();
-        this.onDestroy$.complete();
         this.dialogRef.close();
     }
 }

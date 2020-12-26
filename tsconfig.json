@@ -16,8 +16,15 @@
       "dom"
     ],
     "paths": {
+      "@io/backlog": [
+        "projects/backlog/src/public-api"
+      ],
+      "@io/backlog/content": [
+        "projects/backlog/src/lib/content/*"
+      ],
       "@io/backlog/*": [
-        "projects/backlog/src/lib/public-api"
+        "projects/backlog/src/lib/*",
+        "dist/backlog"
       ],
       "@io/core": [
         "projects/core/src/public-api"
@@ -48,10 +55,6 @@
       "@io/model/*": [
         "projects/model/src/lib/*",
         "dist/model"
-      ],
-      "backlog": [
-        "dist/backlog/backlog",
-        "dist/backlog"
       ]
     }
   }

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { BacklogElementMediaType, BacklogElementTypeId, Levels, RemoteBacklogElement } from '@io/model';
+import { BacklogElementTypeId, ElementType, Levels, RemoteBacklogElement } from '@io/model';
+import { BacklogElementMediaType } from '@io/model/backlog/backlog-element-type';
 import { FileValidator } from 'ngx-material-file-input';
 import { BacklogElementForm } from '../backlog-element-form';
 
@@ -39,17 +40,18 @@ export class VideoElementFormComponent implements OnChanges, OnDestroy, BacklogE
     }
 
     get mediaType(): string {
-        return (this.element && this.element.typeId) ? BacklogElementMediaType.get(this.element.typeId) : '*';
+        return BacklogElementMediaType.get(ElementType.VIDEO) || '*';
     }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if (changes.element) {
-            if (changes.element.currentValue.id) {
+        if (changes.element && changes.element.currentValue) {
+            const currentValue: RemoteBacklogElement = changes.element.currentValue;
+            if (currentValue.id) {
                 this.formGroup.removeControl('content');
-                this.formGroup.addControl('id', this.fb.control(this.element.id, [Validators.required]));
-                this.formGroup.addControl('url', this.fb.control(this.element.url, [Validators.required]));
+                this.formGroup.addControl('id', this.fb.control(currentValue.id, [Validators.required]));
+                this.formGroup.addControl('url', this.fb.control(currentValue.url, [Validators.required]));
             }
-            this.formGroup.patchValue(this.element);
+            this.formGroup.patchValue(currentValue);
         }
     }
 
@@ -64,14 +66,6 @@ export class VideoElementFormComponent implements OnChanges, OnDestroy, BacklogE
 
     onValidate(): void {
         this.validate.emit(this.formGroup.value);
-    }
-
-    snapshot(): RemoteBacklogElement {
-        return this.formGroup.value;
-    }
-
-    valid(): boolean {
-        return this.formGroup.valid;
     }
 
 }

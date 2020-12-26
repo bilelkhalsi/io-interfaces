@@ -74,6 +74,7 @@
             "q&a": "Q&A"
         },
         "element-form": {
+            "placeholder": "Type element title then click 'New Element'",
             "notification": {
                 "created": "Element created successfully!",
                 "updated": "Element updated successfully!",
@@ -109,7 +110,7 @@
             "level": "Level",
             "load-more": "More Elements",
             "disclaimer": "Click 'New Element' to create new element",
-            "empty": "No Elements yet",
+            "empty": "No elements yet in you backlog !",
             "loading": "Loading",
             "action": {
                 "new": "New Element",

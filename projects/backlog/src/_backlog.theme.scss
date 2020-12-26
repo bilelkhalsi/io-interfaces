@@ -1,0 +1,11 @@
+
+@import "./lib/content/backlog-content.theme";
+
+@mixin backlog-theme($theme) {
+    @include io-backlog-content-theme($theme);
+}
+
+
+@mixin backlog-typography($config) {
+    @include io-backlog-content-typography($config)
+}

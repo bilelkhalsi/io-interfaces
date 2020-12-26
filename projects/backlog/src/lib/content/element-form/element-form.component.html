@@ -1,24 +1,21 @@
-<div [ngSwitch]="elementType">
-    <io-document-element-form *ngSwitchCase="ElementTypeCode.DOCUMENT"
-    [element]="backlogFacade.element$ | async"
-    [levels]="levels"
-    (validate)="saveBacklogElement($event)"></io-document-element-form>
-    <io-image-element-form *ngSwitchCase="ElementTypeCode.IMAGE"
-    [element]="backlogFacade.element$ | async"
-    [levels]="levels"
-    (cancel)="cancel()"
-    (validate)="saveBacklogElement($event)"></io-image-element-form>
-    <io-audio-element-form *ngSwitchCase="ElementTypeCode.AUDIO"
-    [element]="backlogFacade.element$ | async"
-    [levels]="levels"
-    (cancel)="cancel()"
-    (validate)="saveBacklogElement($event)"></io-audio-element-form>
-    <io-video-element-form *ngSwitchCase="ElementTypeCode.VIDEO"
-    [element]="backlogFacade.element$ | async"
-    [levels]="levels"
-    (cancel)="cancel()"
-    (validate)="saveBacklogElement($event)"></io-video-element-form>
-    <div *ngSwitchDefault>
-        <p>Element type not supported yet!</p>
-    </div>
+<div class="d-flex mt-1">
+    <mat-form-field appearance="fill" class="flex-fill">
+        <input matInput placeholder="{{ 'backlog.element-form.placeholder' | translate}}"
+        [formControl]="elementTitle"/>
+        <div matSuffix class="d-flex">
+            <button mat-flat-button [matMenuTriggerFor]="elements" color="primary">
+                <mat-icon class="d-inline">arrow_drop_down</mat-icon>
+                <span>{{'backlog.element-list.action.new' | translate}}</span>
+            </button>
+            <button mat-icon-button (click)="elementTitle.reset()" color="primary">
+                <mat-icon>close</mat-icon>
+            </button>
+        </div>
+    </mat-form-field>
 </div>
+
+<mat-menu #elements="matMenu">
+    <a *ngFor="let type of types" mat-menu-item (click)="openNewElementDialog(type)">
+        {{'backlog.element-type.' + type | translate}}
+    </a>
+</mat-menu>
